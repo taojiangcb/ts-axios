@@ -17,14 +17,6 @@ function buildEntry() {
   return outs;
 }
 
-
-//  new HtmlWebpackPlugin({
-//       template: resolve(__dirname, '../template/index.html'),
-//       filename: 'index.html',
-//       // chunks: ['common', 'app']
-//     }),
-
-
 module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js']

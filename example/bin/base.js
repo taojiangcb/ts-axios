@@ -258,7 +258,7 @@
 /******/ 				};
 /******/ 			});
 /******/ 			hotUpdate = {};
-/******/ 			var chunkId = "simple";
+/******/ 			var chunkId = "base";
 /******/ 			// eslint-disable-next-line no-lone-blocks
 /******/ 			{
 /******/ 				/*globals chunkId */
@@ -788,20 +788,20 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire(1)(__webpack_require__.s = 1);
+/******/ 	return hotCreateRequire(0)(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./example/simple/app.ts":
-/*!*******************************!*\
-  !*** ./example/simple/app.ts ***!
-  \*******************************/
+/***/ "./example/base/app.ts":
+/*!*****************************!*\
+  !*** ./example/base/app.ts ***!
+  \*****************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _src_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../src/index */ \"./src/index.ts\");\n\nObject(_src_index__WEBPACK_IMPORTED_MODULE_0__[\"default\"])({\n    method: 'get',\n    url: '/simple/get',\n    params: {\n        a: 1,\n        b: 2\n    }\n});\n\n\n//# sourceURL=webpack:///./example/simple/app.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _src_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../src/index */ \"./src/index.ts\");\n\nObject(_src_index__WEBPACK_IMPORTED_MODULE_0__[\"default\"])({\n    method: 'get',\n    url: '/base/get',\n    params: {\n        foo: ['bar', 'baz']\n    }\n});\nObject(_src_index__WEBPACK_IMPORTED_MODULE_0__[\"default\"])({\n    method: 'get',\n    url: '/base/get',\n    params: {\n        foo: {\n            bar: 'baz'\n        }\n    }\n});\nconst date = new Date();\nObject(_src_index__WEBPACK_IMPORTED_MODULE_0__[\"default\"])({\n    method: 'get',\n    url: '/base/get',\n    params: {\n        date\n    }\n});\nObject(_src_index__WEBPACK_IMPORTED_MODULE_0__[\"default\"])({\n    method: 'get',\n    url: '/base/get',\n    params: {\n        foo: '@:$, '\n    }\n});\nObject(_src_index__WEBPACK_IMPORTED_MODULE_0__[\"default\"])({\n    method: 'get',\n    url: '/base/get',\n    params: {\n        foo: 'bar',\n        baz: null\n    }\n});\nObject(_src_index__WEBPACK_IMPORTED_MODULE_0__[\"default\"])({\n    method: 'get',\n    url: '/base/get#hash',\n    params: {\n        foo: 'bar'\n    }\n});\nObject(_src_index__WEBPACK_IMPORTED_MODULE_0__[\"default\"])({\n    method: 'get',\n    url: '/base/get?foo=bar',\n    params: {\n        bar: 'baz'\n    }\n});\nObject(_src_index__WEBPACK_IMPORTED_MODULE_0__[\"default\"])({\n    method: 'post',\n    url: '/base/post',\n    data: {\n        a: 1,\n        b: 2\n    }\n});\nObject(_src_index__WEBPACK_IMPORTED_MODULE_0__[\"default\"])({\n    method: 'post',\n    url: '/base/post',\n    headers: {\n        'content-type': 'application/json;charset=utf-8'\n    },\n    data: {\n        a: 1,\n        b: 2\n    }\n});\nconst arr = new Int32Array([21, 31]);\nObject(_src_index__WEBPACK_IMPORTED_MODULE_0__[\"default\"])({\n    method: 'post',\n    url: '/base/buffer',\n    data: arr\n});\nconst paramsString = 'q=URLUtils.searchParams&topic=api';\nconst searchParams = new URLSearchParams(paramsString);\nObject(_src_index__WEBPACK_IMPORTED_MODULE_0__[\"default\"])({\n    method: 'post',\n    url: '/base/post',\n    data: searchParams\n});\n\n\n//# sourceURL=webpack:///./example/base/app.ts?");
 
 /***/ }),
 
@@ -993,14 +993,14 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _hel
 
 /***/ }),
 
-/***/ 1:
-/*!*******************************************************************!*\
-  !*** multi webpack-hot-middleware/client ./example/simple/app.ts ***!
-  \*******************************************************************/
+/***/ 0:
+/*!*****************************************************************!*\
+  !*** multi webpack-hot-middleware/client ./example/base/app.ts ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("__webpack_require__(/*! webpack-hot-middleware/client */\"./node_modules/_webpack-hot-middleware@2.25.0@webpack-hot-middleware/client.js\");\nmodule.exports = __webpack_require__(/*! /Users/taojiang/Documents/work/axios-ts/axios-tx/example/simple/app.ts */\"./example/simple/app.ts\");\n\n\n//# sourceURL=webpack:///multi_webpack-hot-middleware/client_./example/simple/app.ts?");
+eval("__webpack_require__(/*! webpack-hot-middleware/client */\"./node_modules/_webpack-hot-middleware@2.25.0@webpack-hot-middleware/client.js\");\nmodule.exports = __webpack_require__(/*! /Users/taojiang/Documents/work/axios-ts/axios-tx/example/base/app.ts */\"./example/base/app.ts\");\n\n\n//# sourceURL=webpack:///multi_webpack-hot-middleware/client_./example/base/app.ts?");
 
 /***/ })
 

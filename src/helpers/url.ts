@@ -1,5 +1,6 @@
 import { isDate, isObject } from './util';
 
+/**特殊字符处理 */
 const encode = function (val: string): string {
   return encodeURIComponent(val)
     .replace(/%40/g, '@')
@@ -30,7 +31,7 @@ export function buildURL(url: string, params?: any): string {
     else {
       values = [val];
     }
-    
+
     values.forEach(val => {
       if (isDate(val)) {
         val = val.toISOString();

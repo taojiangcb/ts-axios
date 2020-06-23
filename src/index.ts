@@ -1,7 +1,3 @@
-import { AxiosRequestConfig } from './types/types';
-
-function axios(config: AxiosRequestConfig) {
-
-}
-
+import axios from './axios';
+export * from './types/types';
 export default axios;
