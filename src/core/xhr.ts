@@ -5,17 +5,17 @@ import {
   ReadyState,
   iAxiosError
 } from '../types/types';
-import { parseHandlers } from './headers';
-import { createAxiosError } from './AxiosError';
+import { parseHandlers } from '../helpers/headers';
+import { createAxiosError } from '../helpers/AxiosError';
 
 export default function (config: iAxiosRequestConfig): AxiosPromise {
-
+  
   return new Promise((resolve, reject) => {
     const { data = null, url, method = 'get', headers, responseType } = config;
     const request = new XMLHttpRequest();
 
     if (responseType) request.responseType = responseType;
-    request.open(method?.toUpperCase(), url, true);
+    request.open(method?.toUpperCase(), url!, true);
 
     request.onreadystatechange = function (e) {
       if (request.readyState !== ReadyState.DONE) {
@@ -26,7 +26,7 @@ export default function (config: iAxiosRequestConfig): AxiosPromise {
       if (request.readyState === ReadyState.UNSENT) {
         return;
       }
-
+      
       const responseHeander = parseHandlers(request.getAllResponseHeaders());
       const responseData = responseType === "text" ? request.responseText : request.response;
       const response: iAxiosResponse = {
