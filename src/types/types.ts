@@ -1,3 +1,4 @@
+import defaults from '../defaults';
 export type Method = 'get' | "GET"
   | 'delete' | 'DELETE'
   | 'put' | "PUT"
@@ -24,6 +25,10 @@ export interface iAxiosRequestConfig {
   responseType?: XMLHttpRequestResponseType;          //返回的类型
   timeout?: number;                                   //timeout
 
+  transformRequest?:AxiosTransformer | AxiosTransformer[];
+  transformResponse?:AxiosTransformer | AxiosTransformer[];
+
+  [propName: string]: any;
 }
 
 export interface iAxiosResponse<T = any> {
@@ -46,6 +51,14 @@ export interface iAxiosError extends Error {
 export interface AxiosPromise<T = any> extends Promise<iAxiosResponse<T>> { }
 
 export interface iAxios {
+
+  defaults: iAxiosRequestConfig;
+
+  interceptors: {
+    request: AxiosInterceptorManager<iAxiosRequestConfig>,
+    response: AxiosInterceptorManager<iAxiosResponse>
+  };
+
   request<T = any>(config: iAxiosRequestConfig): AxiosPromise<T>;                                     //请求的对象
   get<T = any>(url: string, config?: iAxiosRequestConfig): AxiosPromise<T>;                           //
   delete<T = any>(url: string, config?: iAxiosRequestConfig): AxiosPromise<T>;
@@ -54,6 +67,10 @@ export interface iAxios {
   post<T = any>(url: string, data?: any, config?: iAxiosRequestConfig): AxiosPromise<T>;
   put<T = any>(url: string, data?: any, config?: iAxiosRequestConfig): AxiosPromise<T>;
   patch<T = any>(url: string, data?: any, config?: iAxiosRequestConfig): AxiosPromise<T>;
+
+  
+  
+
 }
 
 export interface AxiosInstance extends iAxios {
@@ -72,4 +89,12 @@ export interface ResolvedFn<T> {
 
 export interface RejectedFn {
   (error: any): any
+}
+
+export interface AxiosTransformer {
+  (data: any, headers?: any): any;
+}
+
+export interface AxiosStatic extends AxiosInstance {
+  create(config?:iAxiosRequestConfig ):AxiosInstance;
 }

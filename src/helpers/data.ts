@@ -6,7 +6,6 @@ export function transformRequest(data:any):any {
   }
 }
 
-
 export function transformResponseData(data:any):any {
   if(typeof data === 'string') {
     try {

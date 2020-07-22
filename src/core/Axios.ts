@@ -1,15 +1,16 @@
 import {
-    AxiosInstance,
-    iAxiosRequestConfig,
-    iAxios,
-    AxiosPromise,
-    Method,
-    iAxiosResponse,
-    ResolvedFn,
-    RejectedFn
+  AxiosInstance,
+  iAxiosRequestConfig,
+  iAxios,
+  AxiosPromise,
+  Method,
+  iAxiosResponse,
+  ResolvedFn,
+  RejectedFn
 } from '../types/types';
 import dispatchRequest from '../axios';
 import InterceptorManager from './InterceptorManager';
+import mergeConfig from './mergeConfig';
 
 
 interface Interceptors {
@@ -18,18 +19,22 @@ interface Interceptors {
 }
 
 interface PromiseChain<T> {
-  resolved:ResolvedFn<T> | ((config:iAxiosRequestConfig) =>AxiosPromise);
-  rejected?:RejectedFn;
+  resolved: ResolvedFn<T> | ((config: iAxiosRequestConfig) => AxiosPromise);
+  rejected?: RejectedFn;
 }
 
 export default class Axios implements iAxios {
 
-  interceptors:Interceptors | undefined;
+  defaults: iAxiosRequestConfig;
+  interceptors: Interceptors;
 
-  constructor() {
+  constructor(initConfig: iAxiosRequestConfig) {
+
+    this.defaults = initConfig;
+
     this.interceptors = {
-      request:new InterceptorManager<iAxiosRequestConfig>(),
-      response:new InterceptorManager<iAxiosResponse>()
+      request: new InterceptorManager<iAxiosRequestConfig>(),
+      response: new InterceptorManager<iAxiosResponse>()
     }
   }
 
@@ -42,24 +47,26 @@ export default class Axios implements iAxios {
       config = url;
     }
 
-    const chain:PromiseChain<any>[] = [{
-      resolved:dispatchRequest,
-      rejected:undefined
+    config = mergeConfig(this.defaults, config);
+
+    const chain: PromiseChain<any>[] = [{
+      resolved: dispatchRequest,
+      rejected: undefined
     }]
 
     this.interceptors?.request.forEach(interceptor => {
       chain.unshift(interceptor);
     });
 
-    this.interceptors?.response.forEach(interceptor=>{
+    this.interceptors?.response.forEach(interceptor => {
       chain.push(interceptor);
     })
 
     let promise = Promise.resolve(config);
 
-    while(chain.length) {
-      const {resolved,rejected} = chain.shift()!;
-      promise = promise.then(resolved,rejected);
+    while (chain.length) {
+      const { resolved, rejected } = chain.shift()!;
+      promise = promise.then(resolved, rejected);
     }
 
     return promise;
@@ -106,6 +113,4 @@ export default class Axios implements iAxios {
       data
     }));
   }
-
-
 }

@@ -1,4 +1,5 @@
-import { isObject } from "./util";
+import { isObject, deepMerge } from "./util";
+import { Method } from "../types/types";
 
 /**规范化 */
 function normalizeHadnerName(headers: any, normalizedName: string): void {
@@ -35,4 +36,16 @@ export function parseHandlers(headers: string): any {
     parse[k] = v;
   })
   return parse;
+}
+
+export function flattenHeaders(headers:any,mehtod:Method) : any {
+  if(!headers) return headers;
+  headers = deepMerge(headers.common,headers[mehtod],headers);
+  const methodsToDelete = ['delete','get','head','options','post','put','path','common'];
+
+  methodsToDelete.forEach(method=>{
+    delete headers[mehtod];
+  })
+
+  return headers;
 }
